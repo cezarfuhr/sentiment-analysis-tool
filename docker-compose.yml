@@ -25,6 +25,7 @@ services:
       - ./backend/.env
     depends_on:
       - redis
+      - postgres
     volumes:
       - ./backend:/app
     networks:
@@ -60,6 +61,27 @@ services:
     stdin_open: true
     tty: true
 
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:15-alpine
+    container_name: sentiment-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=sentiment_db
+      - POSTGRES_USER=sentiment
+      - POSTGRES_PASSWORD=sentiment123
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - sentiment-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sentiment"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Redis Cache Service
   redis:
     image: redis:7-alpine
@@ -83,5 +105,7 @@ networks:
     driver: bridge
 
 volumes:
+  postgres-data:
+    driver: local
   redis-data:
     driver: local

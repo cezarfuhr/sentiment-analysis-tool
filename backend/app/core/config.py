@@ -17,6 +17,14 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
     REDIS_DB: int = 0
 
+    # Database
+    DATABASE_URL: str = "postgresql://sentiment:sentiment123@postgres:5432/sentiment_db"
+
+    # JWT
+    SECRET_KEY: str = "your-secret-key-change-in-production"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+
     # Twitter API
     TWITTER_API_KEY: str = ""
     TWITTER_API_SECRET: str = ""

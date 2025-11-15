@@ -4,6 +4,7 @@ import SentimentAnalyzer from './components/SentimentAnalyzer';
 import EmotionAnalyzer from './components/EmotionAnalyzer';
 import BatchAnalyzer from './components/BatchAnalyzer';
 import TwitterAnalyzer from './components/TwitterAnalyzer';
+import HistoryDashboard from './components/HistoryDashboard';
 
 function App() {
   const [activeTab, setActiveTab] = useState('sentiment');
@@ -12,7 +13,8 @@ function App() {
     { id: 'sentiment', label: 'Sentiment Analysis', icon: '📊' },
     { id: 'emotion', label: 'Emotion Detection', icon: '🎭' },
     { id: 'batch', label: 'Batch Analysis', icon: '📦' },
-    { id: 'twitter', label: 'Twitter Analysis', icon: '🐦' }
+    { id: 'twitter', label: 'Twitter Analysis', icon: '🐦' },
+    { id: 'history', label: 'History & Analytics', icon: '📈' }
   ];
 
   return (
@@ -40,6 +42,7 @@ function App() {
         {activeTab === 'emotion' && <EmotionAnalyzer />}
         {activeTab === 'batch' && <BatchAnalyzer />}
         {activeTab === 'twitter' && <TwitterAnalyzer />}
+        {activeTab === 'history' && <HistoryDashboard />}
 
         <footer>
           <p>
